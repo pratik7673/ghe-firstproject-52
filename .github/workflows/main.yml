@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+on:
+ push:
+  branches:  master
+jobs:
+ first_test_job:
+  runs-on: [ubuntu-latest]
+  steps:
+   - name: checkout code
+     uses: actions/checkout@v4
+   - name: install node 
+     uses: actions/setup-node@v4
+     with:
+      node-version: 22
+   - name: Install dependency
+     shell: pwsh
+     run: npm ci
+   - name: Execute Lint
+     run: npm run lint
+   - name: execute test
+     run: npm run test
+   - name: exeute build
+     run: npm run dev  
